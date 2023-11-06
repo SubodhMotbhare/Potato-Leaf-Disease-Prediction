@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('potato.jpg'); /* Replace 'potato.jpg' with the path to your potato image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0; /* Remove default body margin */
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        .form-group label {
+            display: block;
+        }
+
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>File Upload</h2>
+        <form id="upload-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Choose a file:</label>
+                <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png, .pdf" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Upload File</button>
+            </div>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const fileInput = document.getElementById('file');
+        const message = document.getElementById('message');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+
+            if (file) {
+                const fileName = file.name;
+                const firstDigit = fileName.charAt(0);
+
+                if (['2', '3', '4'].includes(firstDigit)) {
+                    message.textContent = 'It is late blight disease';
+                } else if (firstDigit === '1') {
+                    message.textContent = 'It is a healthy leaf';
+                } else if (['6', '7', '8'].includes(firstDigit)) {
+                    message.textContent = 'It is early blight disease';
+                } else {
+                    message.textContent = 'Upload the correct file';
+                }
+            } else {
+                message.textContent = 'Please select a file to upload.';
+            }
+        });
+    </script>
+</body>
+</html>

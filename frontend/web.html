@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('potato.jpg'); /* Replace 'potato.jpg' with the path to your potato image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 5px solid #242222;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        .form-group label {
+            display: block;
+        }
+
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .form-group button {
+            background-color: #444844;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>File Upload</h2>
+        <form id="upload-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Choose a file:</label>
+                <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png, .pdf" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Upload File</button>
+            </div>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const fileInput = document.getElementById('file');
+        const message = document.getElementById('message');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // You can send the formData to the server for processing here
+                // For simplicity, we'll just display a message
+                message.textContent = `File "${file.name}" uploaded successfully.`;
+            } else {
+                message.textContent = 'Please select a file to upload.';
+            }
+        });
+    </script>
+</body>
+</html>
